@@ -35,6 +35,9 @@ regd_users.post("/login", (req, res) => {
 	}
 });
 
+
+
+// Add a new user
 regd_users.put("/auth/review/:isbn", (req, res) => {
 	const isbn = req.params.isbn;
 	const review = req.body.review;
@@ -60,7 +63,8 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
 		});
 });
 
-// Add a book review
+// Delete a review for a book
+// Only the user who added the review can delete it
 regd_users.delete("/auth/review/:isbn", (req, res) => {
 	const isbn = req.params.isbn;
 	const username = req.session.authorization?.username;

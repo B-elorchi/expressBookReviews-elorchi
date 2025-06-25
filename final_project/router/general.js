@@ -23,6 +23,8 @@ public_users.post("/register", (req, res) => {
 		.json({ message: "Username and password are required" });
 });
 
+// Get the book list available in the shop
+// Returns a promise that resolves with the book list or rejects with an error message
 public_users.get("/", function (req, res) {
 	new Promise((resolve, reject) => {
 		if (books) {
@@ -34,7 +36,8 @@ public_users.get("/", function (req, res) {
 		.then((data) => res.status(200).send(JSON.stringify(data, null, 2)))
 		.catch((err) => res.status(500).json({ message: err }));
 });
-
+// Get book details based on ISBN
+// Search by ISBN – Using Promises
 public_users.get("/isbn/:isbn", function (req, res) {
 	const isbn = req.params.isbn;
 	new Promise((resolve, reject) => {
@@ -48,6 +51,23 @@ public_users.get("/isbn/:isbn", function (req, res) {
 		.catch((err) => res.status(404).json({ message: err }));
 });
 
+// public_users.get("/author/:author", function (req, res) {
+// 	const author = req.params.author.toLowerCase();
+// 	new Promise((resolve, reject) => {
+// 		const matchingBooks = Object.values(books).filter((book) =>
+// 			book.author.toLowerCase().includes(author)
+// 		);
+// 		if (matchingBooks.length > 0) {
+// 			resolve(matchingBooks);
+// 		} else {
+// 			reject("No books found by this author");
+// 		}
+// 	})
+// 		.then((data) => res.status(200).send(JSON.stringify(data, null, 2)))
+// 		.catch((err) => res.status(404).json({ message: err }));
+// });
+// Search by Author
+// Search by Author – Using Promises
 public_users.get("/author/:author", function (req, res) {
 	const author = req.params.author.toLowerCase();
 	new Promise((resolve, reject) => {
@@ -64,6 +84,24 @@ public_users.get("/author/:author", function (req, res) {
 		.catch((err) => res.status(404).json({ message: err }));
 });
 
+// public_users.get("/title/:title", function (req, res) {
+// 	const title = req.params.title.toLowerCase();
+// 	new Promise((resolve, reject) => {
+// 		const matchingBooks = Object.values(books).filter((book) =>
+// 			book.title.toLowerCase().includes(title)
+// 		);
+// 		if (matchingBooks.length > 0) {
+// 			resolve(matchingBooks);
+// 		} else {
+// 			reject("No books found with this title");
+// 		}
+// 	})
+// 		.then((data) => res.status(200).send(JSON.stringify(data, null, 2)))
+// 		.catch((err) => res.status(404).json({ message: err }));
+// });
+
+
+// Search by Title
 public_users.get("/title/:title", function (req, res) {
 	const title = req.params.title.toLowerCase();
 	new Promise((resolve, reject) => {
